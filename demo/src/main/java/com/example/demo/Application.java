@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import com.example.demo.run.Location;
 import com.example.demo.run.Run;
-import com.example.demo.run.RunRepository;
+import com.example.demo.run.JdbcClientRunRepository;
 
 import ch.qos.logback.classic.Logger;
 

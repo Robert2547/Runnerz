@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/api/runs")
@@ -21,7 +23,7 @@ public class RunController {
     private final RunRepository runRepository;
 
     public RunController(RunRepository runRepository) {
-        this.runRepository = runRepository; 
+        this.runRepository = runRepository;
     }
 
     // Rest API
@@ -47,21 +49,28 @@ public class RunController {
     @ResponseStatus(HttpStatus.CREATED) // 201 (Created)
     @PostMapping("")
     void create(@Valid @RequestBody Run run) {
-        runRepository.create(run);
+        runRepository.save(run);
     }
 
     // Put
     @ResponseStatus(HttpStatus.NO_CONTENT) // 204 (No Content)
     @PutMapping("/{id}")
     void update(@Valid @RequestBody Run run, @PathVariable Integer id) {
-        runRepository.update(run, id);
+        runRepository.save(run);
     }
 
     // Delete
     @ResponseStatus(HttpStatus.NO_CONTENT) // 204 (No Content)
     @DeleteMapping("/{id}")
     void delete(@PathVariable Integer id) {
-        runRepository.delete(id);
+        runRepository.deleteById(id);
+        ;
     }
+
+    @GetMapping("/location/{location}")
+    public String findByLocation(@PathVariable String location) {
+        return runRepository.findAllByLocation(location).toString();
+    }
+    
 
 }

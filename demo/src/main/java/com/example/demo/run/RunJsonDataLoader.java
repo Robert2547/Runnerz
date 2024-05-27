@@ -16,11 +16,11 @@ import ch.qos.logback.classic.Logger;
 public class RunJsonDataLoader implements CommandLineRunner {
 
     private static Logger log = (Logger) LoggerFactory.getLogger(RunJsonDataLoader.class);
-    private final RunRepository runRepository;
+    private final JdbcClientRunRepository runRepository;
     private final ObjectMapper objectMapper;
 
     // Dependency Injection
-    public RunJsonDataLoader(RunRepository runRepository, ObjectMapper objectMapper) {
+    public RunJsonDataLoader(JdbcClientRunRepository runRepository, ObjectMapper objectMapper) {
         this.runRepository = runRepository;
         this.objectMapper = objectMapper;
     }
@@ -33,7 +33,7 @@ public class RunJsonDataLoader implements CommandLineRunner {
                 log.info("Reading {} runs from JSON data and saving it to a database.", allRuns.runs().size());
                 runRepository.saveAll(allRuns.runs());
             } catch (IOException e) {
-                log.error("Failed to load data from JSON file", e);
+                log.error("ERROR: Failed to load data from JSON file", e);
             }
         }
     }
