@@ -8,7 +8,6 @@ import jakarta.persistence.Version;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
 
-@Entity
 public record Run(@Id Integer id, @NotEmpty String title, LocalDateTime startedOn, LocalDateTime endedOn,
         @Positive Integer miles, Location location, @Version Integer version) {
 
